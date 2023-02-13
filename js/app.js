@@ -6,23 +6,29 @@ const cantidadCarrito = document.getElementById("cantidadCarrito");
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
+
 productos.forEach((product) => {
   let content = document.createElement("div");
   content.className = "card";
   content.innerHTML = `
-  <div class="card" style="width: 18rem; font-family: 'Itim', cursive;">
-  <img src="${product.img}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h3 class="card-title">${product.nombre}</h3>
-    <p class="card-text">${product.descripcion}</p>
-  </div>
+<div class="card" >
+    <img src="${product.img}" class="card-img-top" alt="${product.nombre}">
+    <div class="card-body">
+          <h4 class="card-title">${product.nombre}</h4>
+          <p class="card-description">
+          <span>Descripcion:</span>  ${product.descripcion}
+          </p>
+          <p class="card-text">
+          <span>Precio:</span> $ ${product.precio}
+          </p>        
+    </div>
 </div>
   `;
 
   shopContent.append(content);
 
   let comprar = document.createElement("button");
-  comprar.innerText = "comprar";
+  comprar.innerText = "Agregar al Carrito";
   comprar.className = "comprar";
 
   content.append(comprar);
@@ -49,6 +55,20 @@ productos.forEach((product) => {
       carritoCounter();
       saveLocal();
     }
+/* toastify */
+Toastify({
+  text: "Agregaste un producto al carrito",
+  className: "info",
+  style: {
+    background: "linear-gradient(to right, #00b09b, #000)",
+    border: "3px solid #fff"
+  },
+  offset: {
+    x: 800, 
+    y: 100
+  }
+}).showToast();
+
   });
 });
 
@@ -56,5 +76,3 @@ productos.forEach((product) => {
 const saveLocal = () => {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 };
-
-

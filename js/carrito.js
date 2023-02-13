@@ -45,6 +45,8 @@ const pintarCarrito = () => {
       }
       saveLocal();
       pintarCarrito();
+
+      
     });
 
     let sumar = carritoContent.querySelector(".sumar");
@@ -58,6 +60,21 @@ const pintarCarrito = () => {
 
     eliminar.addEventListener("click", () => {
       eliminarProducto(product.id);
+
+      /* toastify */
+
+      Toastify({
+        text: "Eliminaste un producto del carrito",
+        className: "info",
+        style: {
+          background: "linear-gradient(to right, #FF5733, #000000)",
+          border: "3px solid #fff"
+        },
+        offset: {
+          x: 800, 
+          y: 100
+        }
+      }).showToast();
     });
 
   });
